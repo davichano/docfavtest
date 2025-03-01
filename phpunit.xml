@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+        bootstrap="config/bootstrap.php"
+        colors="true"
+        stopOnFailure="false"
+        failOnWarning="true"
+        failOnRisky="true"
+>
+    <testsuites>
+        <testsuite name="Unit">
+            <directory>tests/Unit</directory>
+        </testsuite>
+        <testsuite name="Integration">
+            <directory>tests/Integration</directory>
+        </testsuite>
+    </testsuites>
+
+    <php>
+        <!-- Configurar el entorno para pruebas -->
+        <env name="APP_ENV" value="test"/>
+        <env name="DB_NAME" value="docfav"/>
+        <env name="DB_USER" value="root"/>
+        <env name="DB_PASSWORD" value=""/>
+        <env name="DB_HOST" value="127.0.0.1"/>
+        <env name="DB_DRIVER" value="pdo_mysql"/>
+    </php>
+</phpunit>
