@@ -1,109 +1,122 @@
-# **Doc Fav Tech Test**
+# Doc Fav Tech Test
 
-A PHP application following **Domain-Driven Design (DDD)** and **Clean Architecture** principles.  
-The goal of this project is to demonstrate **good software design practices** while implementing **user registration and
-management** using **Doctrine ORM**, **Value Objects**, **Repositories**, and **Use Cases**.
+A simple PHP web application following **Domain-Driven Design (DDD)** and **Clean Architecture**.  
+This project implements a **REST API** using **PHP 8.3**, **Doctrine ORM**, **Symfony Event Dispatcher**, and **Monolog
+** for logging.
 
-## **Links**
+## Links
 
-- [GitHub](#)
+- [GitHub Repository](https://github.com/davichano/docfavtest) _(Update with actual link)_
 
-## **Table of Contents**
-
+## Table of Contents
 - [Installation](#installation)
 - [General Description](#general-description)
     - [Requirements](#requirements)
-    - [Util commands](#util-commands)
+  - [Util Commands](#util-commands)
 
 ---
 
-## **Installation**
+## Installation
 
-1. Clone the repository
-
-    ```sh
-    git clone https://github.com/davichano/docfavtest.git
-    cd docfavtest
-    ```
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/davichano/docfavtest
+   cd docfavtest
+   ```
 
 2. Install dependencies:
+   ```sh
+   composer install
+   ```
 
-    ```sh
-    composer install
-    ```      
-3. Set up environment variables by copying .env.example:
+3. Configure environment variables:
+   Create a `.env` file with the following content:
+   ```env
+   DB_NAME=docfav
+   DB_USER=root
+   DB_PASSWORD=
+   DB_HOST=127.0.0.1
+   DB_DRIVER=pdo_mysql
+   APP_ENV=dev
+   ```
 
-    ```sh
-    cp .env.example .env
-    ```  
-4. Sync the database:
+4. Run database migrations:
+   ```sh
+    php cli-config.php orm:schema-tool:create  
+   ```
 
-    ```sh
-    php cli-config.php orm:schema-tool:create
-    ```
+5. Start the built-in PHP server:
+   ```sh
+   php -S localhost:8000 -t public/
+   ```
 
-## **General Description**
-
-This application is built to **manage user registration and authentication** while ensuring a **clean and maintainable
-codebase** using **best practices in software architecture**.
-
-Key features include:
-
-- **Domain-Driven Design (DDD)**: The project is structured into **Domain, Application, Infrastructure, and Presentation
-  layers**.
-- **Use of Value Objects**: Important fields such as `UserId`, `Email`, `Name`, and `Password` are encapsulated as Value
-  Objects to ensure consistency and immutability.
-- **Doctrine ORM for Persistence**: The application uses **Doctrine ORM** to handle database operations, following the *
-  *Repository Pattern**.
-- **Separation of Concerns**: The business logic is decoupled from the infrastructure using **Ports & Adapters (
-  Hexagonal Architecture)**.
-- **Event-Driven Architecture**: A domain event (`UserRegisteredEvent`) is triggered when a user is successfully
-  registered.
-- **Automated Testing**: The application includes **unit tests** for Value Objects, Entities, and Use Cases, as well as
-  **integration tests** for the database.
-- **Docker Support**: The project can be set up using **Docker** for easier deployment.
+6. The API is now accessible at:
+   ```
+   http://localhost:8000
+   ```
 
 ---
+
+## General Description
+
+This is a REST API for user registration, implementing:
+
+- **Domain-Driven Design (DDD)**
+- **Clean Architecture**
+- **Doctrine ORM** for database abstraction
+- **Event-Driven Programming** with Symfony Event Dispatcher
+- **Logging** with Monolog
+- **Unit and Integration Tests** with PHPUnit
 
 ### **Requirements**
 
-To run this project, you need:
-
-✅ **PHP 8.3** (Recommended)  
-✅ **Composer** (Dependency manager for PHP)  
-✅ **MySQL** (Database engine used with Doctrine ORM)  
-✅ **Doctrine ORM** (Object-Relational Mapper for PHP)  
-✅ **PHPUnit** (Testing framework)  
-✅ **Docker** (Optional, for containerized development)
+- PHP 8.3
+- Composer
+- MySQL
+- Doctrine ORM
 
 ---
 
-### **Util Commands**
+## Util Commands
 
-💡 **Doctrine ORM Commands:**
+- **Show registered entities:**
+  ```sh
+  php cli-config.php orm:info
+  ```
 
-- `php cli-config.php orm:info` → Show registered entities.
-- `php cli-config.php orm:schema-tool:create` → Create the database schema.
-- `php cli-config.php orm:schema-tool:update --force` → Update the database schema without losing data.
+- **Create database schema:**
+  ```sh
+  php cli-config.php orm:schema-tool:create
+  ```
 
-💡 **Doctrine Migrations Commands (If used instead of `schema-tool`):**
+- **Update database schema without losing data:**
+  ```sh
+  php cli-config.php orm:schema-tool:update --force
+  ```
 
-- `php cli-config.php migrations:diff` → Generate a new migration based on changes in entities.
-- `php cli-config.php migrations:migrate` → Apply all pending migrations to the database.
-- `php cli-config.php migrations:status` → Show the status of migrations.
-
-💡 **Testing and Code Quality:**
-
-- `./vendor/bin/phpunit` → Run unit and integration tests.
-- `./vendor/bin/phpstan analyse` → Run static code analysis.
-- `./vendor/bin/php-cs-fixer fix` → Automatically format the code to follow PSR standards.
+- **Run unit tests:**
+  ```sh
+  ./vendor/bin/phpunit
+  ```
 
 ---
 
-### **🎯 Next Steps**
+## Logs and Debugging
 
-- Implement the **RegisterUserUseCase** following Clean Architecture.
-- Create a **REST API Controller** to handle user registration requests.
-- Deploy the application using **Docker**.
+- The application logs are stored in:
+  ```sh
+  logs/app.log
+  ```
+- Log levels:
+    - `DEBUG` for development
+    - `INFO` for user events
 
-🚀 **This project is a technical demonstration of Clean Architecture and DDD in PHP.** 🚀
+---
+
+### Future Improvements
+
+- Implement authentication and token-based access
+- Expand API functionality (update and delete users)
+- Docker support for easier deployment
+
+---

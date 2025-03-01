@@ -8,18 +8,23 @@ use Domain\User\ValueObject\Email;
 use Domain\User\ValueObject\Name;
 use Domain\User\ValueObject\Password;
 use Domain\User\ValueObject\UserId;
+use Infrastructure\Persistence\Doctrine\Types\EmailType;
+use Infrastructure\Persistence\Doctrine\Types\NameType;
+use Infrastructure\Persistence\Doctrine\Types\PasswordType;
+use Infrastructure\Persistence\Doctrine\Types\UserIdType;
 
 #[ORM\Entity]
 #[ORM\Table(name: "users")]
 class User
 {
-    #[ORM\Id, ORM\Column(type: "string")]
+    #[ORM\Id]
+    #[ORM\Column(type: UserIdType::NAME)]
     private UserId $id;
-    #[ORM\Column(type: "string", length: 50)]
+    #[ORM\Column(type: NameType::NAME, length: 50)]
     private Name $name;
-    #[ORM\Column(type: "string", unique: true)]
+    #[ORM\Column(type: EmailType::NAME, length: 100, unique: true)]
     private Email $email;
-    #[ORM\Column(type: "string")]
+    #[ORM\Column(type: PasswordType::NAME, length: 50)]
     private Password $password;
     #[ORM\Column(type: "datetime_immutable")]
     private DateTimeImmutable $createdAt;

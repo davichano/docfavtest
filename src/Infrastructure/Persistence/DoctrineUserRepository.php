@@ -8,6 +8,7 @@ use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\OptimisticLockException;
 use Domain\User\Entity\User;
 use Domain\User\Repository\UserRepositoryInterface;
+use Domain\User\ValueObject\Email;
 use Domain\User\ValueObject\UserId;
 
 class DoctrineUserRepository implements UserRepositoryInterface
@@ -49,5 +50,10 @@ class DoctrineUserRepository implements UserRepositoryInterface
     public function findById(UserId $id): ?User
     {
         return $this->entityManager->find(User::class, $id);
+    }
+
+    public function findByEmail(Email $email): ?User
+    {
+        return $this->entityManager->getRepository(User::class)->findOneBy(['email' => $email->value()]);
     }
 }
