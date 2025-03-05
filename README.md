@@ -6,7 +6,7 @@ This project implements a **REST API** using **PHP 8.3**, **Doctrine ORM**, **Sy
 
 ## Links
 
-- [GitHub Repository](https://github.com/davichano/docfavtest) _(Update with actual link)_
+- [GitHub Repository](https://github.com/davichano/docfavtest)
 
 ## Table of Contents
 - [Installation](#installation)
